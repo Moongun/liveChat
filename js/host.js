@@ -1,6 +1,10 @@
 var socket = io.connect();
 var myType = 'host';
 
+$(document).ready(function(){
+    socket.emit('init host')
+})
+
 $("body").on('click', function(e) {
     e.preventDefault();
     var receiver = e.target.id.replace('send_', '');
@@ -22,7 +26,9 @@ $("body").on('click', function(e) {
 });
 
 socket.on("new chat", function(data){
-    if(data.id !== socket.id) {
+    var isChatExists = 1 <= $(`div#chat_${data.id}`).length ? true : false;
+
+    if(data.id !== socket.id && !isChatExists) {
         var chat = `<div id="chat_${data.id}" class="container">
             <div class="client-name">
                 <span>Client_${data.id.slice(1,4)}</span>

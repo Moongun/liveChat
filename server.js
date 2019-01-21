@@ -30,7 +30,20 @@ function response(req, res) {
 }
 
 io.on("connection", function(socket){
-    
+    var socketIds = Object.keys(io.sockets.sockets);
+
+    socket.on("init host", function(){
+        var clientIds = socketIds.filter(function(id){
+            return id !== socket.id;
+        })
+        if (clientIds.length > -1) {
+            for (var key in clientIds) {
+                io.sockets.emit("new chat", {id: clientIds[key]})
+            }    
+        }
+        
+    })
+
     io.sockets.emit("new chat", {id: socket.id});
     
     socket.on('disconnect', function() {
