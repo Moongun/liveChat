@@ -51,7 +51,9 @@ io.on("connection", function(socket){
     });
     
     socket.on("send message", function(data, callback){
-        io.sockets.emit("update messages", data);
+        if(data.message){
+            io.sockets.emit("update messages", data);
+        }
         callback();
     });
 });
