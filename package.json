@@ -1,0 +1,19 @@
+{
+    "name": "liveChat",
+    "version": "1.0.0",
+    "keywords": [
+        "livechat",
+        "chat",
+        "node",
+        "js"
+    ],
+    "author": "Moongun",
+    "contributors": [],
+    "description": "Recruitment task",
+    "licence": "UNLICENCED",
+    "private": true,
+    "dependencies": {
+        "jquery": "^3.3.1",
+        "socket.io": "^2.2.0"
+    }
+}

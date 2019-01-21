@@ -1,0 +1,128 @@
+body {
+    background: #f15432;
+    height: 100%;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    margin: 20px auto;
+    width: 400px;
+    background: #f2f2f2;
+}
+
+.history {
+    min-height: 500px;
+    padding: 20px 50px;
+}
+
+form {
+    display: flex;
+    justify-content: space-around;
+}
+
+.bubble {
+    position: relative;
+    margin: 5px 0;
+    padding: 10px;
+    max-width: 55%;
+    border-radius: 2px;
+    word-break: break-all;
+}
+
+.my-bubble {
+    background: #ffffff;
+    color: #000000;
+}
+
+.not-my-bubble {
+    background: #f04632;
+    color: #fef6f2;
+}
+
+.bubble:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    display: block;
+    width: 0;
+    z-index: 1;
+    top: 0;
+}
+
+.not-my-bubble:after 
+{
+    border-width: 0px 10px 10px 0px;
+    border-color: transparent #f04632;
+    left: -10px;
+}
+
+.my-bubble:after 
+{
+    border-width: 0px 0px 10px 10px;
+    border-color: transparent #ffffff;
+    right: -10px;
+}
+
+
+.flex {
+    display: flex;
+}
+
+.my-bubble-position {
+    justify-content: flex-end;
+}
+
+.not-my-bubble-position {
+    align-content: flex-start;
+}
+
+.submit-btn {
+    display: none;
+}
+
+.chat {
+    background: white;
+    padding: 15px 0;
+}
+
+.message {
+    flex-basis: 90%;
+}
+
+.message > .input-msg {
+    width: 100%;
+    padding: 0 5px;
+}
+
+.input-msg {
+    border:none;
+    height: 100%;
+}
+
+.button {
+    flex-basis: 10%;
+    text-align: center;
+}
+
+.flex-element {
+    margin: 0 10px;
+}
+
+i {
+    font-size: 2em;
+    color: #f04632;
+}
+
+.client-name {
+    height: 50px;
+    line-height: 50px;
+    background: white;
+    text-align: center;
+    font-weight: 600;
+    color: #f04632;
+    font-size: 1.3em;
+    text-transform: uppercase;
+}
+
+
