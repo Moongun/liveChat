@@ -29,7 +29,26 @@ function response(req, res) {
     });
 }
 
+function generateRandomNumber(min, max){
+    return Math.floor(Math.random() * (max-min) + min);
+}
+
+function getRandomName(){
+    var fakeNames = ['Piotr', 'Grażyna', 'Bożena', 'Witkacy', 'Fabian', 'James', 'Filip'];
+
+    return fakeNames[Math.floor(Math.random()*fakeNames.length)];
+}
+
+function findSocketById(sockets, id){
+    return sockets[id]
+}
+
 io.on("connection", function(socket){
+    socket.fakeName =  getRandomName() + generateRandomNumber(100,999);
+    socket.on("create title", function(){
+        socket.emit("update title tag", {fakeName: socket.fakeName})
+    })
+    
     var socketIds = Object.keys(io.sockets.sockets);
 
     socket.on("init host", function(){
@@ -38,13 +57,13 @@ io.on("connection", function(socket){
         })
         if (clientIds.length > -1) {
             for (var key in clientIds) {
-                io.sockets.emit("new chat", {id: clientIds[key]})
+                var client = findSocketById(io.sockets.sockets, clientIds[key]);
+                io.sockets.emit("new chat", {id: clientIds[key], fakeName: client.fakeName})
             }    
         }
-        
-    })
+    });
 
-    io.sockets.emit("new chat", {id: socket.id});
+    io.sockets.emit("new chat", {id: socket.id, fakeName: socket.fakeName});
     
     socket.on('disconnect', function() {
         io.sockets.emit("close chat", {id: socket.id})

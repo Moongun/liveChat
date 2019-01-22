@@ -1,6 +1,10 @@
 var socket = io.connect();
 var myType = 'client';
 
+$(document).ready(function(){
+    socket.emit("create title");
+})
+
 $("form").submit(function(e) {
     e.preventDefault();
     var newMessage = $(this).find("#msg-text").val();
@@ -17,6 +21,10 @@ $("form").submit(function(e) {
     }
 
 });
+
+socket.on("update title tag", function(data){
+    $('title').text(`${data.fakeName} - LiveChat - client `)
+})
 
 socket.on("update messages", function(data){
     if(socket.id == data.sender || socket.id == data.receiver){

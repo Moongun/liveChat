@@ -3,6 +3,7 @@ var myType = 'host';
 
 $(document).ready(function(){
     socket.emit('init host')
+    socket.emit("create title")
 })
 
 $("body").on('click', function(e) {
@@ -27,11 +28,11 @@ $("body").on('click', function(e) {
 
 socket.on("new chat", function(data){
     var isChatExists = 1 <= $(`div#chat_${data.id}`).length ? true : false;
-
-    if(data.id !== socket.id && !isChatExists) {
+    
+    if(data.id !== socket.id && !isChatExists) { 
         var chat = `<div id="chat_${data.id}" class="container">
             <div class="client-name">
-                <span>Client_${data.id.slice(1,4)}</span>
+                <span>${data.fakeName}</span>
             </div>
             <div class="history"></div>
             <div class="chat">
@@ -52,6 +53,10 @@ socket.on("new chat", function(data){
     
     $(document.body).append(chat);
 });
+
+socket.on("update title tag", function(data){
+    $('title').text(`${data.fakeName} - LiveChat - host `)
+})
 
 socket.on("close chat", function(data){
     $(`#chat_${data.id}`).remove();
